@@ -32,8 +32,9 @@ information, please see the [`CONTRIBUTING.md`](CONTRIBUTING.md) file.
 
 ### Undersigned
 
-| GitHub Username | Full Name |
-| --------------- | --------- |
+| GitHub Username   | Full Name          |
+| ----------------- | ------------------ |
+| @grootstebozewolf | Jeroen Bloemscheer |
 <!-- to sign, include a single line above this comment containing the following text:
 | @username | First Last |
 -->

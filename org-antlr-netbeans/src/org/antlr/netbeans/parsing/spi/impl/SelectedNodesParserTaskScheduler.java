@@ -16,10 +16,13 @@ import org.antlr.netbeans.editor.text.VersionedDocumentUtilities;
 import org.antlr.netbeans.parsing.spi.ParseContext;
 import org.antlr.netbeans.parsing.spi.ParserTaskManager;
 import org.antlr.netbeans.parsing.spi.ParserTaskScheduler;
-import org.netbeans.modules.editor.settings.storage.api.EditorSettings;
+import org.netbeans.api.editor.mimelookup.MimeLookup;
+import org.netbeans.api.editor.mimelookup.MimePath;
+import org.netbeans.modules.editor.settings.storage.api.EditorSettingsStorage;
 import org.openide.filesystems.FileObject;
 import org.openide.loaders.DataObject;
 import org.openide.nodes.Node;
+import org.openide.util.Lookup;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.windows.TopComponent;
 
@@ -50,12 +53,16 @@ public class SelectedNodesParserTaskScheduler extends ParserTaskScheduler {
                 final DataObject dataObject = nodes[0].getLookup().lookup(DataObject.class);
                 if (dataObject != null && dataObject.isValid()) {
                     final FileObject fileObject = dataObject.getPrimaryFile();
-                    if (fileObject.isValid() && EditorSettings.getDefault().getAllMimeTypes().contains(fileObject.getMIMEType())) {
-                        VersionedDocument versionedDocument = VersionedDocumentUtilities.getVersionedDocument(fileObject);
-                        ParseContext context = new ParseContext(SelectedNodesParserTaskScheduler.this.getClass(), versionedDocument);
-                        schedule(context);
-                        return null;
-                    }
+                        if (fileObject.isValid()) {
+                            String mimeType = fileObject.getMIMEType();
+                            Lookup lookup = MimeLookup.getLookup(MimePath.get(mimeType));
+                            if (lookup != null) {
+                                VersionedDocument versionedDocument = VersionedDocumentUtilities.getVersionedDocument(fileObject);
+                                ParseContext context = new ParseContext(SelectedNodesParserTaskScheduler.this.getClass(), versionedDocument);
+                                schedule(context);
+                                return null;
+                            }
+                        }
                 }
             }
 
