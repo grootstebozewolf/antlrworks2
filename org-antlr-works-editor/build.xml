@@ -70,15 +70,9 @@
                 <istrue value="${is.antlr4.uptodate}"/>
             </and>
         </condition>
-
-        <scriptdef name="propertyreset" language="javascript"
-                   description="Allows to assign @{property} new value">
-            <attribute name="name"/>
-            <attribute name="value"/>
-            project.setProperty(attributes.get("name"), attributes.get("value"));
-        </scriptdef>
-
-        <propertyreset name="${is.jar.uptodate}" value="${is.all.uptodate}" />
+        <echo message="Setting is.jar.uptodate from is.all.uptodate" />
+        <property name="${is.jar.uptodate}" value="${is.all.uptodate}" />
+        <echo message="Set is.jar.uptodate to ${is.jar.uptodate}" />
     </target>
 
     <target name="compile" depends="init,up-to-date,antlr4,projectized-common.compile" unless="is.jar.uptodate" />
