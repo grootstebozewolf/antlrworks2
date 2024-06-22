@@ -39,7 +39,7 @@ import org.antlr.netbeans.editor.text.VersionedDocumentUtilities;
 import org.antlr.netbeans.parsing.spi.ParserData;
 import org.antlr.netbeans.parsing.spi.ParserTaskManager;
 import org.antlr.netbeans.util.NotificationIcons;
-import org.antlr.v4.runtime.misc.TestRig;
+import org.antlr.v4.gui.TestRig;
 import org.antlr.works.editor.grammar.GrammarDataObject;
 import org.antlr.works.editor.grammar.GrammarEditorKit;
 import org.antlr.works.editor.grammar.GrammarParserDataDefinitions;
@@ -427,8 +427,7 @@ public final class RunInTestRigAction implements ActionListener {
                     } finally {
                         Thread.currentThread().setContextClassLoader(contextClassLoader);
                     }
-                }
-            } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | MalformedURLException ex) {
+            } catch (ClassNotFoundException |NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | MalformedURLException ex) {
                 Exceptions.printStackTrace(ex);
             }
         }
