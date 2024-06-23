@@ -427,7 +427,8 @@ public final class RunInTestRigAction implements ActionListener {
                     } finally {
                         Thread.currentThread().setContextClassLoader(contextClassLoader);
                     }
-            } catch (ClassNotFoundException |NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | MalformedURLException ex) {
+                }
+            } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | MalformedURLException ex) {
                 Exceptions.printStackTrace(ex);
             }
         }
